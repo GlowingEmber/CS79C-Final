@@ -34,7 +34,7 @@ to your service.
   }
 
   const operationsDoc = `query MyQuery {
-    Facts(where: {id: {_eq: ${getRandomInt(2)}}}) {
+    Facts(where: {id: {_eq: ${getRandomInt(20)}}}) {
       fact
     }
   }`;
