@@ -1,8 +1,9 @@
 // CS 79C
 const express = require('express')
-const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
+const fetch = require("node-fetch");
+
 
 
 function getRandomInt(max) {
@@ -10,16 +11,18 @@ function getRandomInt(max) {
 }
 
 
-app.post("/", (req, res) => {
+app.get("/", (req, res) => {
   /*
 This is an example snippet - you should consider tailoring it
 to your service.
 */
-  const name = req.body.name;
-
   async function fetchGraphQL(operationsDoc, operationName, variables) {
-    const result = await fetch("http://localhost:8080/v1/graphql", {
+    const result = await fetch("https://funfact.hasura.app/v1/graphql", {
       method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-hasura-admin-secret": "s0h8zyygPVcFQWNYM9D21KrDdKF6ujd1HQZVsc4l9EXcXQcEEeKm2v2qdlCIjzr7"
+      },
       body: JSON.stringify({
         query: operationsDoc,
         variables: variables,
